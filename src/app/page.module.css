@@ -1,229 +1,306 @@
+.contrastButtonUserEffects {
+  background: var(--contrastBackground);
+  outline: none;
+  color: var(--mainTextColor);
+}
+.contrastButtonUserEffects:hover {
+  background: var(--contrastBackgroundHover);
+}
+.contrastButtonUserEffects:active {
+  background: var(--contrastBackgroundActive);
+}
+
 .main {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  position: relative;
+  min-height: 100vh;
+
+  background: var(--mainGradient);
+  color: var(--mainTextColor);
+}
+
+.loaderWrapper {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--mainGradient);
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  gap: 20px;
+  z-index: 2;
+}
+
+.loaderFade {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loaderTitle {
+  font-size: 6em;
+}
+
+.content {
+  padding: 32px 24px;
+  min-height: 100vh;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 0 20px;
 }
 
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.description a {
+.switcher {
+  background-color: #111;
+  cursor: pointer;
+  width: 125px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.description p {
+  justify-content: space-between;
+  padding: 2px 10px;
+  height: auto;
+  min-height: 55px;
+  border-radius: 30px;
   position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
 }
 
-.code {
-  font-weight: 700;
-  font-family: var(--font-mono);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
-}
-
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
-}
-
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
-}
-
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 30ch;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 4rem 0;
-}
-
-.center::before {
-  background: var(--secondary-glow);
+.switcher .switcherToggler {
+  background-color: white;
+  width: 45px;
+  height: 45px;
+  z-index: 1;
   border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
+  display: block;
+  position: absolute;
+  left: 4%;
+  top: 9%;
+  transition: all 0.4s ease;
 }
 
-.center::after {
-  background: var(--primary-glow);
-  width: 240px;
-  height: 180px;
+.switcherInput:checked + .moon + .switcherToggler {
+  left: 60%;
+}
+
+.switcherInput {
+  position: absolute;
+  z-index: -2;
+  opacity: 0;
+}
+
+.moon {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 15px 15px 0 0 #d0d5d2;
+  right: 17%;
+  top: -15%;
+}
+
+.sun {
+  position: absolute;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-color: #ffbb52;
+  left: 4%;
+  top: 9%;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filtersTitle {
+  font-size: 25px;
+}
+
+.filterButtonsWrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.filterButton {
+  composes: contrastButtonUserEffects;
+
+  display: flex;
+  font-size: 15px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  outline: none;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.searchBarInput {
+  position: relative;
+  display: flex;
+  border-radius: 20px;
+  background: var(--searchBarColor);
+  height: 50px;
+
+  width: 70%;
+  min-width: 300px;
+  align-self: center;
+
+  padding: 8px 16px;
+
+  color: var(--searchBarTextColor);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+
+  border: none;
+  outline: none;
+}
+
+.searchBarInput::placeholder {
+  color: var(--searchBarPlaceholder);
+}
+
+.searchBarInput:hover {
+  background: var(--searchBarHover);
+}
+
+.searchBarInput:hover::placeholder {
+  color: var(--searchBarPlaceholderHover);
+}
+
+.plusButton {
+  composes: contrastButtonUserEffects;
+
+  border-radius: 50px;
+  border: none;
+
+  width: 30%;
+  min-width: 130px;
+
+  cursor: pointer;
+
+  padding: 10px;
+
+  font-size: 20px;
+}
+
+.tasksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 30px;
+  max-height: 50vw;
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+.task {
+  border-radius: 8px;
+  background: var(--contrastBackground);
+  min-height: 30px;
+  min-width: 200px;
+  display: flex;
+  padding: 30px;
+  flex-shrink: 0;
+
+  font-size: 20px;
+
+  justify-content: space-between;
+}
+
+.taskLeftWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.taskDone {
+  border-radius: 8px;
+  background: var(--taskDoneColor);
+  color: var(--taskDoneTextColor);
+}
+
+.taskCheckbox {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
   z-index: -1;
 }
 
-.center::before,
-.center::after {
-  content: '';
-  left: 50%;
-  position: absolute;
-  filter: blur(45px);
-  transform: translateZ(0);
-}
-
-.logo {
+.taskCheckboxLabel {
   position: relative;
-}
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
-  }
+  cursor: pointer;
 
-  .card:hover span {
-    transform: translateX(4px);
-  }
-}
+  background-color: transparent;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 4px;
 
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
+  border: 2px solid var(--taskCheckboxColor);
 }
 
-/* Mobile */
-@media (max-width: 700px) {
-  .content {
-    padding: 4rem;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-    margin-bottom: 120px;
-    max-width: 320px;
-    text-align: center;
-  }
-
-  .card {
-    padding: 1rem 2.5rem;
-  }
-
-  .card h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .center {
-    padding: 8rem 0 6rem;
-  }
-
-  .center::before {
-    transform: none;
-    height: 300px;
-  }
-
-  .description {
-    font-size: 0.8rem;
-  }
-
-  .description a {
-    padding: 1rem;
-  }
-
-  .description p,
-  .description div {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-  }
-
-  .description p {
-    align-items: center;
-    inset: 0 0 auto;
-    padding: 2rem 1rem 1.4rem;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
-    background-clip: padding-box;
-    backdrop-filter: blur(24px);
-  }
-
-  .description div {
-    align-items: flex-end;
-    pointer-events: none;
-    inset: auto 0 0;
-    padding: 2rem;
-    height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
-    z-index: 1;
-  }
+.taskCheckboxLabel:has(> .taskCheckbox:checked) {
+  border: 2px solid var(--taskCheckboxCheckedColor);
 }
 
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
-  }
+.taskCheckboxLabel:has(> .taskCheckbox:checked)::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  width: 6px;
+  height: 14px;
+  border: solid var(--taskCheckboxCheckedColor);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
-  }
+.taskDelete {
+  border: none;
+  background: var(--deleteButtonColor);
+  padding: 5px 10px;
 
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-  }
+  color: var(--deleteButtonTextColor);
+
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+.taskDelete:hover {
+  background: var(--deleteButtonHoverColor);
+}
+
+.taskDoneDelete {
+  background: var(--deleteButtonDoneColor);
+  color: var(--deleteButtonDoneTextColor);
+}
+
+.taskDoneDelete:hover {
+  background: var(--deleteButtonDoneHover);
 }
